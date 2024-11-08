@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Glitch&display=swap');
+
+.hero-section-div{
+    width: 100%;
+    height: 80rem;
+    background-color: transparent;
+    /* margin-top: 5rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.hero-section-left{
+    width: 70rem;
+    /* background-color: #38a3a5; */
+    height: 60rem;
+}
+.hero-section-left p{
+    padding-top: 1rem;
+    /* font-family: "Poppins", sans-serif; */
+    font-size: 6rem;
+    font-weight: 200;
+    font-style: normal;
+    letter-spacing: .15rem;
+    /* line-height: 1; */
+    margin-left: 1rem;
+    margin-bottom: 6rem;
+}
+.thirtynine-text{
+    /* font-family: "Poppins", sans-serif; */
+    font-size: 7rem;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: .15rem;
+    /* line-height: 10rem; */
+}
+.cyberattack-text{
+    font-size: 7rem;
+    letter-spacing: .15rem;
+    /* line-height: 10rem; */
+    font-weight: 700;
+    font-style: normal;
+}
+
+.get-started-btn{
+    height: 5rem;
+    width: auto;
+    /* color: #3a8340; */
+    font-size: 2rem;
+    font-weight: 700;
+    margin-left: 1rem;
+    border-style: solid;
+    border-width: .4rem;
+    border-radius: 1rem;
+    /* border-color:#72BF78; */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    white-space: nowrap;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    background-color: white;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.hero-section-right{
+    
+    width: 60rem;
+    height: 60rem;
+    /* background-color: palevioletred; */
+    margin-left: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-section-right img{
+    height: 60rem;
+    filter: grayscale();
+    -webkit-filter: grayscale();
+}
+@media(max-width:1115px){
+    .hero-section-left{
+        width: 100rem;
+    }
+    .hero-section-right{
+        width: 45rem;
+    }
+    .hero-section-right img{
+        height: 45rem ;
+    }
+}
+@media(max-width:991px){
+    .hero-section-left{
+        width: 115rem;
+    }
+    .hero-section-right{
+        width: 40rem;
+    }
+    .hero-section-right img{
+        height: 40rem ;
+    }
+}
+@media(max-width:942px){
+    .hero-section-div{
+        flex-direction: column;
+        margin-top: 5rem;
+
+    }
+    .hero-section-right{
+        align-items: start;
+    }
+    .hero-section-left{
+        width: 95%;
+        height: 40rem;
+    }
+    .hero-section-left p{
+        font-size: 5rem;
+        /* line-height: 8rem; */
+    }
+    .hero-section-right{
+        width: 95%;
+        margin: 0;
+    }
+    .thirtynine-text{
+        font-size: 6rem;
+    }
+    .cyberattack-text{
+        font-size: 6rem;
+    }
+}
+@media (max-width:634px) {
+    .hero-section-left p{
+        font-size: 4rem;
+        /* line-height: 7rem; */
+    }
+    .thirtynine-text{
+        font-size: 5rem;
+    }
+    .cyberattack-text{
+        font-size: 5rem;
+    }
+}
+@media (max-width:531px) {
+    .hero-section-left{
+        width: 95%;
+        height: 20rem;
+    }
+    
+    .hero-section-left p{
+        font-size: 2rem;
+        /* line-height: 1rem; */
+        margin-bottom: 4rem;
+    }
+    .hero-section-right{
+        align-items: start;
+    }
+    .thirtynine-text{
+        font-size: 3rem;
+    }
+    .cyberattack-text{
+        font-size: 3rem;
+    }
+    .get-started-btn{
+        height: 4rem;
+        width: auto;
+        /* color: #3a8340; */
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-left: 1rem;
+        border-style: solid;
+        border-width: .35rem;
+        border-radius: 1rem;
+        /* border-color:#72BF78; */
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+}
+@media(max-width:458px){
+    .hero-section-left p{
+        font-size: 2rem;
+        /* line-height: 0rem; */
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+    .hero-section-right{
+        align-items: start;
+    }
+    .thirtynine-text{
+        font-size: 2rem;
+    }
+    .cyberattack-text{
+        font-size: 2rem;
+    }
+}
+@media(max-width:457px){
+    .hero-section-left{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+    }
+    .hero-section-left p{
+        font-size: 1.5rem;
+        /* line-height: 0rem; */
+        margin-bottom: 2rem;
+        
+
+    }
+    .hero-section-right{
+        align-items: start;
+    }
+    .hero-section-right img{
+        height: 35rem;
+    }
+    .get-started-btn{
+        margin-left: 0;
+    }
+}

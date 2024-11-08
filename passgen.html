@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        html{
+        font-size: 10px;
+        }
+        *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: jost;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            position: relative;
+        }
+
+        .sub-container{
+            position: absolute;
+            left: 30rem;
+            top: 1rem0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            
+        }
+        h1{
+            font-size: 50px;
+        }
+
+        #password {
+            margin-top: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: green;
+        }
+
+        #copyMessage {
+            margin-top: 10px;
+            color: green;
+            font-size: 14px;
+            display: none;
+        }
+        .left-section{
+        width: 25rem;
+        height: 100vh;
+        background-color: #007bff;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 0.1rem;
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
+        gap: 0.1rem;
+        flex-shrink: 0;
+
+    }
+    .button{
+        height:4.5rem;
+        padding: 0;
+        font-size: 16px;
+        cursor: pointer;
+        margin:0;
+    }
+    .ButtonS{
+        background-color: #007bff ;
+        color: white;
+        border: none;
+    }
+    </style>
+</head>
+<body>
+    <div class="left-section">
+        <button class="button one"onclick="openHomepage()">Your Passwords</button>
+        <button class="button two"onclick="openPassHealth()">Check Your Password Strength</button>
+        <button class="button three" onclick="openNewPage()">Random Password Generator</button>
+    </div>
+    <div class="container">
+    <div class="sub-container">
+        <h1>Password Generator</h1>
+        <button class="ButtonS" onclick="generatePassword()">Generate Password</button>
+        <div id="password"></div>
+        <button class="ButtonS" id="copyBtn" onclick="copyPassword()">Copy to Clipboard</button>
+        <div id="copyMessage">Password copied to clipboard!</div>
+    </div>
+    </div>
+
+    <script src="passgen.js"></script>
+    <script>
+            function openHomepage() {
+                if (isUserLoggedIn()) {
+                    window.location.href = 'homepage.html';
+                } else {
+                    alert("Please log in first.");
+                    window.location.href = 'login.html';
+                }
+            }
+
+            function openPassHealth() {
+                if (isUserLoggedIn()) {
+                    window.location.href = 'passwordHealth.html';
+                } else {
+                    alert("Please log in first.");
+                    window.location.href = 'login.html';
+                }
+            }
+
+            function openNewPage() {
+                if (isUserLoggedIn()) {
+                    window.location.href = 'passgen.html';
+                } else {
+                    alert("Please log in first.");
+                    window.location.href = 'login.html';
+                }
+            }
+
+            // Helper function to check if the user is logged in
+            function isUserLoggedIn() {
+                return localStorage.getItem("loggedInUser") !== null;
+            }
+
+    </script>
+</body>
+</html>

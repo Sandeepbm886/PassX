@@ -1,0 +1,120 @@
+
+
+        .header-section-div{
+            width: 100%;
+            height: 7rem;
+            background-color: #007bff;
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 999;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .left-section,.right-section{
+            flex: 1;
+            /* background-color: aliceblue; */
+        }
+        .right-section{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: -1px;
+            
+        }
+        .menu-list{
+            display: flex;
+            color: #ffffff;
+            gap: 1.5rem;
+            list-style-position: inside;
+            list-style-type: none;
+            margin-right: 1rem;
+            margin-left: 1rem;
+            font-size: 1.6rem;
+        }
+        .logo-div{
+            height: 7rem;
+            aspect-ratio: 1;
+            /* background-color: rgb(46, 52, 64); */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            
+        }
+        .logo{
+            height: 6rem;
+            aspect-ratio: 1;
+        }
+        .checkbtn {
+            font-size: 22px;
+            /* color: black; */
+            float: right;
+            
+            margin-right: 1rem;
+            cursor: pointer;
+            display: none;
+            }
+
+            #check {
+            display: none;
+            float: left;
+            }
+        @media(max-width: 570px) {
+            .header-section-div{
+                display: flex;
+                /* flex-direction: column; */
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                aspect-ratio: 1;
+                
+            }
+            .left-section{
+                width: 100%;
+                display: flex;
+            align-items: center;
+            /* background-color: aqua; */
+            }
+            .right-section{
+                width: 100%;
+                height: 7rem;
+                display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            }
+            .menu-list{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                /* padding-left: 8rem; */
+                /* aspect-ratio: 1; */
+                position: absolute;
+                text-align: center;
+                z-index: -1;
+                right: -30rem;
+                top: 7rem;
+                left: 30rem;
+                gap: 2rem;
+                /* bottom: 0; */
+                background-color: aliceblue;
+                transition: all 0.35s linear;
+            }
+            .checkbtn{
+                display: block;
+            }
+            #check:checked~ul {
+                /* background-color: aquamarine; */
+                top: 7rem;
+                right: -1rem;
+                left: 5rem;
+                
+            }
+
+        }
+
