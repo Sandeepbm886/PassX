@@ -208,8 +208,4 @@ window.addEventListener("popstate", (event) => {
     }
 });
 
-function logout() {
-    localStorage.removeItem("loggedInUser"); // Clear the logged-in user
-    alert("You have been logged out.");
-    window.location.href = "login.html"; // Redirect to login page
-}
+
