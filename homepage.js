@@ -126,7 +126,7 @@ function deletePassword(row, entryToDelete) {
 // Function to update the strength bar
 function updateStrengthBar(passwordValue, strengthBar) {
     let point = 0;
-    const widthPower = ["1%", "25%", "50%", "75%", "100%"];
+    const widthPower = ["1%", "25%", "50%", "73%", "73%"];
     const colorPower = ["#D73F40", "#DC6551", "#F2B84F", "#BDE952", "#3ba62f"];
 
     if (passwordValue.length >= 6) {
