@@ -371,10 +371,13 @@ button.logout-btn {
   table,tbody,tr,td{
     display: block;
     width: 100%;
+    overflow: hidden;
+    max-width: 100%;
   }
   tr{
     margin-bottom: 1.5rem;
     background-color: silver;
+    
   }
   table tbody tr td{
     text-align:right;
@@ -396,8 +399,10 @@ button.logout-btn {
     display: inline-block;
     margin-left: 10rem;
     height: 0.5rem; 
-    width: 60%; 
+    width: 100%; 
     border-radius: 4px;
+    overflow: hidden;
+    max-width: 100%;
     
   }
 
