@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
         html{
         font-size: 10px;
         }
@@ -13,12 +15,13 @@
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: jost;
+        font-family: 'Jost', sans-serif;
         }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Jost', sans-serif;
             position: relative;
             background-color: #f4f4f4;
+            overflow-x: hidden;
         }
 
         .container {
@@ -36,6 +39,7 @@
             /* position: absolute; */
             left: 30rem;
             top: 1rem0;
+            height: 100vh;
         }
 
         button {
@@ -62,12 +66,12 @@
             font-size: 14px;
             display: none;
         }
-        .left-section div{
+        .left-section div:nth-of-type(1){
     width: 25rem;
     height: 100%; 
     background-color: #007bff;
     min-height: 100vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: stretch;
     padding-top: 0.1rem;
@@ -76,6 +80,55 @@
     gap: 0.1rem;
     flex-shrink: 0;
     position: fixed;
+}
+.left-section div{
+  width: 25rem;
+  height: 100%; 
+  background-color: #007bff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.1rem;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  gap: 0.1rem;
+  flex-shrink: 0;
+  position: fixed;
+}
+.left-section .button-grp{
+    /* margin-top: 3rem; */
+    padding-top: 3rem;
+  }
+.left-section .title{
+    display: none;
+    
+  }
+
+
+  
+    .button{
+      height:4.5rem;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: white;
+      border: solid 0.1rem lightgray;
+      border-radius: 0.4rem;
+      -webkit-border-radius: 0.4rem;
+      -moz-border-radius: 0.4rem;
+      -ms-border-radius: 0.4rem;
+      -o-border-radius: 0.4rem;
+      width: 24rem;
+      transition: background-color 0.3s ease;
+      -webkit-transition: background-color 0.3s ease;
+      -moz-transition: background-color 0.3s ease;
+      -ms-transition: background-color 0.3s ease;
+      -o-transition: background-color 0.3s ease;
+      
+}
+.button:hover{
+  background-color: lightgray;
+  font-size: 17px;
 }
 .checkbtn{
     display: none;
@@ -110,15 +163,14 @@
         font-size: 9rem;
         text-align: center;
         font-weight: bolder;
-        font-family: sans-serif;
+        font-family: 'Jost', sans-serif;
         color: white;
       }
       .left-section div:nth-of-type(1){
         position: static;
         object-fit:contain;
-        /* flex-direction: row; */
         min-height: auto;
-        
+        display: flex;
         width: 100vw;
         padding-right: 0;
         flex: 1;
@@ -154,14 +206,30 @@
         border-width: 0.1rem;
     
       }
+
+    .left-section .button-grp{
+        padding-top: 0rem;
+      }
       .button{
-        border: solid 0.1rem black;
-        border-radius: .4rem;
-        -webkit-border-radius: .4rem;
-        -moz-border-radius: .4rem;
-        -ms-border-radius: .4rem;
-        -o-border-radius: .4rem;
+        border: solid 0.1 lightgray;
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
         cursor: pointer;
+        width: 95%;
+        transition: background-color 0.3s ease;
+        -webkit-transition: background-color 0.3s ease;
+        -moz-transition: background-color 0.3s ease;
+        -ms-transition: background-color 0.3s ease;
+        -o-transition: background-color 0.3s ease;
+    }
+    .button:hover{
+      background-color: lightgray;
+      font-size: 18px;
     }
     .container{
         margin-top: 3rem;
@@ -179,7 +247,7 @@
         </label>
         <div class="title">PassX</div>
         </div>
-        <div>
+        <div class="button-grp">
         <button class="button one" onclick="openHomepage()">
             Your Passwords
         </button>
