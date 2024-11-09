@@ -54,11 +54,13 @@ function addPasswordToTable(entry) {
     // Name cell
     const nameCell = document.createElement('td');
     nameCell.textContent = entry.name;
+    nameCell.setAttribute('data-label', 'Website Name');
     row.appendChild(nameCell);
 
     // URL cell
     const urlCell = document.createElement('td');
     urlCell.textContent = entry.url;
+    urlCell.setAttribute('data-label', 'Website URL');
     row.appendChild(urlCell);
 
     // Password cell with Show/Hide button
@@ -66,6 +68,7 @@ function addPasswordToTable(entry) {
     const passwordSpan = document.createElement('span');
     passwordSpan.textContent = '******';
     passwordSpan.className = 'password-text';
+    passwordCell.setAttribute('data-label', 'Password');
 
     const toggleButton = document.createElement('button');
     toggleButton.textContent = 'Show';
@@ -81,6 +84,7 @@ function addPasswordToTable(entry) {
     const strengthBar = document.createElement('div');
     strengthBar.className = 'strength-bar';
     updateStrengthBar(entry.password, strengthBar);
+    strengthCell.setAttribute('data-label', 'Strength');
     strengthCell.appendChild(strengthBar);
     row.appendChild(strengthCell);
 
@@ -89,6 +93,7 @@ function addPasswordToTable(entry) {
     const copyButton = document.createElement('button');
     copyButton.textContent = 'Copy';
     copyButton.onclick = () => copyToClipboard(entry.password);
+    copyCell.setAttribute('data-label', 'Copy');
     copyCell.appendChild(copyButton);
     row.appendChild(copyCell);
 
@@ -97,6 +102,7 @@ function addPasswordToTable(entry) {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.onclick = () => deletePassword(row, entry);
+    deleteCell.setAttribute('data-label', 'Delete');
     deleteCell.appendChild(deleteButton);
     row.appendChild(deleteCell);
 

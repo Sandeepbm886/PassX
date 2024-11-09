@@ -1,110 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PassX</title>
-    <link rel="stylesheet" href="homepge.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PassX</title>
+    <link rel="stylesheet" href="homepge.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
     <div class="left-section">
-        <button class="button one"onclick="openHomepage()">Your Passwords</button>
-        <button class="button two"onclick="openPassHealth()">Check Your Password Strength</button>
-        <button class="button three" onclick="openNewPage()">Random Password Generator</button>
+        <div>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="title">PassX</div>
+        </div>
+        <div>
+        <button class="button one" onclick="openHomepage()">
+            Your Passwords
+        </button>
+        <button class="button two" onclick="openPassHealth()">
+            Check Your Password Strength
+        </button>
+        <button class="button three" onclick="openNewPage()">
+            Random Password Generator
+        </button>
+        </div>
+
+        
     </div>
     <div class="main-container">
         <div class="header">
-            <span id="welcomeMessage"></span> 
+            <span id="welcomeMessage"></span>
             <button class="logout-btn" onclick="logout()">
                 <i class="fa fa-right-from-bracket"></i>
-            </button>             
-        </div>
-    <div class="middle-section">
-    <div class="password-entry">
-        <div class="field-group">
-            <label for="website-name">Website Name:</label>
-            <input type="text" id="website-name" class="input-field" placeholder="Enter website name">
-        </div>
-        
-        <div class="field-group">
-            <label for="website-url">Website URL:</label>
-            <input type="url" id="website-url" class="input-field" placeholder="Enter website URL">
-        </div>
-        
-        <div class="field-group">
-            <label for="website-password">Password:</label>
-            <div class="password-container">
-                <input type="password" id="website-password" class="input-field" placeholder="Enter password">
-                <span class="toggle-password" onclick="togglePasswordVisibility()">🙈</span>
-            </div>
-        </div>
-        
-        <div class="field-group">
-            <button type="button" class="add-button" onclick="addPassword()">Add</button>
+            </button>
         </div>
 
+        <div class="middle-section">
+            <div class="password-entry">
+                <div class="field-group">
+                    <label for="website-name">Website Name:</label>
+                    <input type="text" id="website-name" class="input-field" placeholder="Enter website name" />
+                </div>
+                <div class="field-group">
+                    <label for="website-url">Website URL:</label>
+                    <input type="url" id="website-url" class="input-field" placeholder="Enter website URL" />
+                </div>
+
+                <div class="field-group">
+                    <label for="website-password">Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="website-password" class="input-field" placeholder="Enter password" />
+                        <span class="toggle-password" onclick="togglePasswordVisibility()">🙈</span>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <button type="button" class="add-button" onclick="addPassword()">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="password-table-container">
+            <table id="password-table">
+                <thead>
+                    <tr>
+                        <th>Website Name</th>
+                        <th>Website URL</th>
+                        <th>Password</th>
+                        <th>Strength</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be added here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
-    </div>
-    
-    <div id="password-table-container">
-        <table id="password-table">
-            <thead>
-                <tr>
-                    <th>Website Name</th>
-                    <th>Website URL</th>
-                    <th>Password</th>
-                    <th>Strength</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Rows will be added here by JavaScript -->
-            </tbody>
-        </table>
-    </div>
-</div>
 
     <script src="./homepage.js"></script>
     <script>
-            function openHomepage() {
-                if (isUserLoggedIn()) {
-                    window.location.href = 'homepage.html';
-                } else {
-                    alert("Please log in first.");
-                    window.location.href = 'login.html';
-                }
+        function openHomepage() {
+            if (isUserLoggedIn()) {
+                window.location.href = "homepage.html";
+            } else {
+                alert("Please log in first.");
+                window.location.href = "login.html";
             }
+        }
 
-            function openPassHealth() {
-                if (isUserLoggedIn()) {
-                    window.location.href = 'passwordHealth.html';
-                } else {
-                    alert("Please log in first.");
-                    window.location.href = 'login.html';
-                }
+        function openPassHealth() {
+            if (isUserLoggedIn()) {
+                window.location.href = "passwordHealth.html";
+            } else {
+                alert("Please log in first.");
+                window.location.href = "login.html";
             }
+        }
 
-            function openNewPage() {
-                if (isUserLoggedIn()) {
-                    window.location.href = 'passgen.html';
-                } else {
-                    alert("Please log in first.");
-                    window.location.href = 'login.html';
-                }
+        function openNewPage() {
+            if (isUserLoggedIn()) {
+                window.location.href = "passgen.html";
+            } else {
+                alert("Please log in first.");
+                window.location.href = "login.html";
             }
+        }
 
-            
-            function isUserLoggedIn() {
-                return localStorage.getItem("loggedInUser") !== null;
-            }
+        function isUserLoggedIn() {
+            return localStorage.getItem("loggedInUser") !== null;
+        }
 
-                function logout() {
+        function logout() {
             localStorage.removeItem("loggedInUser"); // Clear the logged-in user
             alert("You have been logged out.");
             window.location.href = "login.html"; // Redirect to login page
         }
+        const mediaQuery = window.matchMedia("(max-width: 1020px)");
+
+document.getElementById('check').addEventListener('change', function() {
+    const leftSection = document.querySelector('.left-section > div:nth-of-type(2)');
+    
+    if (mediaQuery.matches) { // Check if screen width is 360px or less
+        if (this.checked) {
+            leftSection.style.left = '0';
+        } else {
+            leftSection.style.left = '-110rem'; // Or any off-screen position
+        }
+    }
+});
+
 
     </script>
 </body>
+
 </html>

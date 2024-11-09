@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <style>
         html{
         font-size: 10px;
@@ -16,23 +17,23 @@
         }
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
+            position: relative;
             background-color: #f4f4f4;
         }
 
         .container {
             text-align: center;
-            padding: 20px;
+            /* padding: 20px; */
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             flex: 1;
-            position: relative;
+            height: 100vh;
+            /* position: relative; */
         }
 
         .sub-container{
-            position: absolute;
+            /* position: absolute; */
             left: 30rem;
             top: 1rem0;
         }
@@ -61,20 +62,30 @@
             font-size: 14px;
             display: none;
         }
-        .left-section{
-        width: 25rem;
-        height: 100vh;
-        background-color: #007bff;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        padding-top: 0.1rem;
-        padding-left: 0.1rem;
-        padding-right: 0.1rem;
-        gap: 0.1rem;
-        flex-shrink: 0;
-
-    }
+        .left-section div{
+    width: 25rem;
+    height: 100%; 
+    background-color: #007bff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 0.1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    gap: 0.1rem;
+    flex-shrink: 0;
+    position: fixed;
+}
+.checkbtn{
+    display: none;
+  }
+  #check{
+    display: none;
+  }
+.title{
+    display: none;
+}
     .button{
         height:4.5rem;
         padding: 0;
@@ -87,13 +98,100 @@
         color: white;
         border: none;
     }
+    @media(max-width:1020px){
+    body{
+        display: flex;
+        flex-direction: column;      
+      }
+      .left-section{
+        position: relative;
+      }
+      .title{
+        font-size: 9rem;
+        text-align: center;
+        font-weight: bolder;
+        font-family: sans-serif;
+        color: white;
+      }
+      .left-section div:nth-of-type(1){
+        position: static;
+        object-fit:contain;
+        /* flex-direction: row; */
+        min-height: auto;
+        
+        width: 100vw;
+        padding-right: 0;
+        flex: 1;
+        flex-grow: 1;
+      }
+      .left-section div:nth-of-type(2){
+        position: absolute;
+        height: 15rem;
+        min-height: auto;
+        width: 100vw;
+        padding-right: 0;
+        flex: 1;
+        flex-grow: 1;
+        justify-content: center;
+        margin-top: 0.4rem;
+        top: 3rem;
+        left: -110rem;
+        transition: left 0.3s ease;
+        background-color: white;
+        border-style: solid;
+        border-width: 0.1rem;
+        border-radius: 0.4rem;
+        -webkit-border-radius: 0.4rem;
+        -moz-border-radius: 0.4rem;
+        -ms-border-radius: 0.4rem;
+        -o-border-radius: 0.4rem;
+    }
+    .checkbtn{
+        display: block;
+        color: white;
+        font-size: 2.5rem;
+        border-style: solid;
+        border-width: 0.1rem;
+    
+      }
+      .button{
+        border: solid 0.1rem black;
+        border-radius: .4rem;
+        -webkit-border-radius: .4rem;
+        -moz-border-radius: .4rem;
+        -ms-border-radius: .4rem;
+        -o-border-radius: .4rem;
+        cursor: pointer;
+    }
+    .container{
+        margin-top: 3rem;
+
+    }
+}
     </style>
 </head>
 <body>
     <div class="left-section">
-        <button class="button one"onclick="openHomepage()">Your Passwords</button>
-        <button class="button two"onclick="openPassHealth()">Check Your Password Strength</button>
-        <button class="button three" onclick="openNewPage()">Random Password Generator</button>
+        <div>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="title">PassX</div>
+        </div>
+        <div>
+        <button class="button one" onclick="openHomepage()">
+            Your Passwords
+        </button>
+        <button class="button two" onclick="openPassHealth()">
+            Check Your Password Strength
+        </button>
+        <button class="button three" onclick="openNewPage()">
+            Random Password Generator
+        </button>
+        </div>
+
+        
     </div>
     <div class="container">
     <div class="sub-container">
@@ -138,6 +236,19 @@
             function isUserLoggedIn() {
                 return localStorage.getItem("loggedInUser") !== null;
             }
+            const mediaQuery = window.matchMedia("(max-width: 1020px)");
+
+document.getElementById('check').addEventListener('change', function() {
+    const leftSection = document.querySelector('.left-section > div:nth-of-type(2)');
+    
+    if (mediaQuery.matches) { // Check if screen width is 360px or less
+        if (this.checked) {
+            leftSection.style.left = '0';
+        } else {
+            leftSection.style.left = '-110rem'; // Or any off-screen position
+        }
+    }
+});
 
     </script>
 </body>
