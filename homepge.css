@@ -15,12 +15,17 @@
       position: relative;
       
     }
-
+.left-section{
+  background-image: url("ball-7280265.jpg");
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
     .left-section div:nth-of-type(1){
       width: 25rem;
       height: 100%; 
-      background-color: #007bff;
+      /* background-color: #007bff; */
       min-height: 100vh;
       display: none;
       flex-direction: column;
@@ -35,7 +40,10 @@
   .left-section div{
     width: 25rem;
     height: 100%; 
-    background-color: #007bff;
+    background-image: url("ball-7280265.jpg");
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -213,9 +221,11 @@
 
 .header{
 
-  background-color: #007bff;
+  background-image: url("ball-7280265\ \(1\).jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: fixed;
-  /* height: 3rem; */
   left: 25rem;
   right: 0;
   z-index: 999999;
@@ -223,8 +233,6 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 3rem;
-  /* margin-right: 2rem; */
-  /* margin-bottom: 20rem; */
 }
 
 
