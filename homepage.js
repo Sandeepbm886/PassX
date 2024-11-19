@@ -96,6 +96,14 @@ function addPasswordToTable(entry) {
     copyCell.setAttribute('data-label', 'Copy');
     copyCell.appendChild(copyButton);
     row.appendChild(copyCell);
+     // Edit button cell
+     const editCell = document.createElement('td');
+     const editButton = document.createElement('button');
+     editButton.textContent = 'Edit';
+     editCell.setAttribute('data-label', 'Edit');
+     editButton.onclick = () => enableEdit(row, entry);
+     editCell.appendChild(editButton);
+     row.appendChild(editCell);
 
     // Delete button cell
     const deleteCell = document.createElement('td');
@@ -108,6 +116,159 @@ function addPasswordToTable(entry) {
 
     tableBody.appendChild(row);
 }
+function enableEdit(row, entry) {
+    const cells = row.querySelectorAll('td');
+
+    // Replace the text content of cells with input fields
+    cells[0].innerHTML = `<input type="text" value="${entry.name}" />`;
+    cells[1].innerHTML = `<input type="text" value="${entry.url}" />`;
+    cells[2].innerHTML = `<input type="text" value="${entry.password}" />`; // Show actual password in editable mode
+
+    // Replace Edit and Delete buttons with Save and Cancel buttons
+    cells[cells.length - 2].innerHTML = `<button>Save</button>`;
+    cells[cells.length - 2].querySelector('button').onclick = () => saveEdit(row, entry);
+
+    cells[cells.length - 1].innerHTML = `<button>Cancel</button>`;
+    cells[cells.length - 1].querySelector('button').onclick = () => cancelEdit(row, entry);
+
+    // Automatically show the password when editing
+    togglePasswordVisibilityInEditMode(row, entry.password);
+}
+function togglePasswordVisibilityInEditMode(row, password) {
+    const passwordInput = row.querySelector('input[type="text"]');
+    if (passwordInput) {
+        passwordInput.value = password; // Ensure the actual password is shown in the input field
+    }
+}
+function updateStrengthDisplay() {
+    const strengthBars = document.querySelectorAll('.strength-bar');
+    const widthPower = ["1%", "25%", "50%", "75%", "100%"];
+    const colorPower = ["#D73F40", "#DC6551", "#F2B84F", "#BDE952", "#3ba62f"];
+
+    strengthBars.forEach(bar => {
+        const strengthPercentage = parseFloat(bar.style.width) || 0; // Get current width percentage
+        let color = "#000"; // Default color
+
+        // Determine the color based on the percentage
+        if (strengthPercentage <= 1) {
+            color = colorPower[0];
+        } else if (strengthPercentage <= 25) {
+            color = colorPower[1];
+        } else if (strengthPercentage <= 50) {
+            color = colorPower[2];
+        } else if (strengthPercentage <= 75) {
+            color = colorPower[3];
+        } else if (strengthPercentage <= 100) {
+            color = colorPower[4];
+        }
+
+        if (window.innerWidth <= 768) {
+            // For responsive view, show percentage as text
+            bar.style.display = 'none'; // Hide the bar
+            if (!bar.nextElementSibling || !bar.nextElementSibling.classList.contains('strength-percentage')) {
+                const percentageText = document.createElement('span');
+                percentageText.textContent = `${strengthPercentage}%`;
+                percentageText.classList.add('strength-percentage');
+                percentageText.style.color = color; // Apply the color
+                bar.parentNode.appendChild(percentageText); // Add percentage next to the bar
+            } else {
+                const percentageText = bar.nextElementSibling;
+                percentageText.textContent = `${strengthPercentage}%`; // Update existing percentage
+                percentageText.style.color = color; // Update the color
+            }
+        } else {
+            // For larger screens, show the bar and hide percentage
+            bar.style.display = 'block'; // Show the bar
+            if (bar.nextElementSibling && bar.nextElementSibling.classList.contains('strength-percentage')) {
+                bar.nextElementSibling.remove(); // Remove percentage text
+            }
+        }
+    });
+}
+
+// Run the function on page load and whenever the window resizes
+window.addEventListener('load', updateStrengthDisplay);
+window.addEventListener('resize', updateStrengthDisplay);
+
+
+
+
+// Function to save edits and update localStorage
+// Function to save edits and update the existing row without creating a new one
+function saveEdit(row, entry) {
+    const inputs = row.querySelectorAll('input');
+    const [newName, newUrl, newPassword] = Array.from(inputs).map(input => input.value.trim());
+
+    if (newName && newUrl && newPassword) {
+        // Update the entry object
+        const updatedEntry = { name: newName, url: newUrl, password: newPassword };
+
+        // Update localStorage for the logged-in user
+        const username = localStorage.getItem('loggedInUser');
+        const userPasswords = JSON.parse(localStorage.getItem(username)) || [];
+
+        // Replace the old entry with the updated one
+        const updatedPasswords = userPasswords.map(item =>
+            item.name === entry.name && item.url === entry.url ? updatedEntry : item
+        );
+
+        localStorage.setItem(username, JSON.stringify(updatedPasswords));
+
+        // Update the current row directly without creating a new one
+        updateRowContent(row, updatedEntry);
+    } else {
+        alert("All fields must be filled!");
+    }
+}
+
+// Function to update the content of an existing row
+function updateRowContent(row, entry) {
+    // Update the cells in the row
+    row.cells[0].textContent = entry.name; // Update Website Name
+    row.cells[1].textContent = entry.url;  // Update Website URL
+
+    // Update Password cell with toggle functionality
+    const passwordCell = row.cells[2];
+    passwordCell.innerHTML = ''; // Clear the existing content
+
+    const passwordSpan = document.createElement('span');
+    passwordSpan.textContent = '******';
+    passwordSpan.className = 'password-text';
+
+    const toggleButton = document.createElement('button');
+    toggleButton.textContent = 'Show';
+    toggleButton.dataset.password = entry.password;
+    toggleButton.onclick = () => togglePassword(passwordSpan, toggleButton);
+
+    passwordCell.appendChild(passwordSpan);
+    passwordCell.appendChild(toggleButton);
+
+    // Update Strength bar cell
+    const strengthBar = document.createElement('div');
+    strengthBar.className = 'strength-bar';
+    updateStrengthBar(entry.password, strengthBar);
+
+    row.cells[3].innerHTML = ''; // Clear the strength cell
+    row.cells[3].appendChild(strengthBar);
+
+    // Restore Edit and Delete buttons
+    const editCell = row.cells[row.cells.length - 2];
+    editCell.innerHTML = `<button>Edit</button>`;
+    editCell.querySelector('button').onclick = () => enableEdit(row, entry);
+
+    const deleteCell = row.cells[row.cells.length - 1];
+    deleteCell.innerHTML = `<button>Delete</button>`;
+    deleteCell.querySelector('button').onclick = () => deletePassword(row, entry);
+}
+
+
+
+// Function to cancel editing and revert to original values
+function cancelEdit(row, entry) {
+    row.innerHTML = ''; // Clear the row
+    addPasswordToTable(entry); // Re-render the original entry
+}
+
 
 // Function to delete a password entry and update localStorage
 function deletePassword(row, entryToDelete) {
@@ -126,7 +287,7 @@ function deletePassword(row, entryToDelete) {
 // Function to update the strength bar
 function updateStrengthBar(passwordValue, strengthBar) {
     let point = 0;
-    const widthPower = ["1%", "25%", "50%", "73%", "73%"];
+    const widthPower = ["1%", "25%", "50%", "75%", "100%"];
     const colorPower = ["#D73F40", "#DC6551", "#F2B84F", "#BDE952", "#3ba62f"];
 
     if (passwordValue.length >= 6) {

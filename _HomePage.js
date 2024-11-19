@@ -47,6 +47,7 @@ window.onload = () => {
 };
 
 // Function to add a password entry row to the table
+// Function to add a password entry row to the table
 function addPasswordToTable(entry) {
     const tableBody = document.getElementById('password-table').querySelector('tbody');
     const row = document.createElement('tr');
@@ -92,6 +93,14 @@ function addPasswordToTable(entry) {
     copyCell.appendChild(copyButton);
     row.appendChild(copyCell);
 
+    // Edit button cell
+    const editCell = document.createElement('td');
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.onclick = () => enableEdit(row, entry);
+    editCell.appendChild(editButton);
+    row.appendChild(editCell);
+
     // Delete button cell
     const deleteCell = document.createElement('td');
     const deleteButton = document.createElement('button');
@@ -102,6 +111,60 @@ function addPasswordToTable(entry) {
 
     tableBody.appendChild(row);
 }
+
+// Function to enable edit mode for a row
+function enableEdit(row, entry) {
+    const cells = row.querySelectorAll('td');
+
+    // Replace the text content of cells with input fields
+    cells[0].innerHTML = `<input type="text" value="${entry.name}" />`;
+    cells[1].innerHTML = `<input type="text" value="${entry.url}" />`;
+    cells[2].innerHTML = `<input type="password" value="${entry.password}" />`;
+
+    // Replace Edit and Delete buttons with Save and Cancel buttons
+    cells[cells.length - 2].innerHTML = `<button>Save</button>`;
+    cells[cells.length - 2].querySelector('button').onclick = () => saveEdit(row, entry);
+
+    cells[cells.length - 1].innerHTML = `<button>Cancel</button>`;
+    cells[cells.length - 1].querySelector('button').onclick = () => cancelEdit(row, entry);
+}
+
+
+// Function to save edits and update localStorage
+function saveEdit(row, entry) {
+    const inputs = row.querySelectorAll('input');
+    const [newName, newUrl, newPassword] = Array.from(inputs).map(input => input.value.trim());
+
+    if (newName && newUrl && newPassword) {
+        // Update the entry object
+        const updatedEntry = { name: newName, url: newUrl, password: newPassword };
+
+        // Update localStorage for the logged-in user
+        const username = localStorage.getItem('loggedInUser');
+        const userPasswords = JSON.parse(localStorage.getItem(username)) || [];
+
+        // Replace the old entry with the updated one
+        const updatedPasswords = userPasswords.map(item =>
+            item.name === entry.name && item.url === entry.url ? updatedEntry : item
+        );
+
+        localStorage.setItem(username, JSON.stringify(updatedPasswords));
+
+        // Redraw the updated row
+        row.innerHTML = ''; // Clear the row
+        addPasswordToTable(updatedEntry); // Re-add the updated entry
+    } else {
+        alert("All fields must be filled!");
+    }
+}
+
+
+// Function to cancel editing and revert to original values
+function cancelEdit(row, entry) {
+    row.innerHTML = ''; // Clear the row
+    addPasswordToTable(entry); // Re-render the original entry
+}
+
 
 // Function to delete a password entry and update localStorage
 function deletePassword(row, entryToDelete) {

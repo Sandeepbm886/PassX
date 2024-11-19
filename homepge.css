@@ -416,3 +416,8 @@ button.logout-btn {
 
 
 }
+span.strength-percentage {
+  background-color: black;
+  font-weight: bold;
+  padding: 0.2rem 0.2rem;
+}
