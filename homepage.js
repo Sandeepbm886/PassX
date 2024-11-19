@@ -214,12 +214,16 @@ function saveEdit(row, entry) {
 
         localStorage.setItem(username, JSON.stringify(updatedPasswords));
 
-        // Update the current row directly without creating a new one
+        // Update the row directly without adding a new one
         updateRowContent(row, updatedEntry);
+
+        // Re-run the strength display logic to handle responsive views
+        updateStrengthDisplay(); // <--- Call this here to ensure the display is updated
     } else {
         alert("All fields must be filled!");
     }
 }
+
 
 // Function to update the content of an existing row
 function updateRowContent(row, entry) {
