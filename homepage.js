@@ -54,13 +54,13 @@ function addPasswordToTable(entry) {
     // Name cell
     const nameCell = document.createElement('td');
     nameCell.textContent = entry.name;
-    nameCell.setAttribute('data-label', 'Website Name');
+    nameCell.setAttribute('data-label', 'Website Name/URL');
     row.appendChild(nameCell);
 
     // URL cell
     const urlCell = document.createElement('td');
     urlCell.textContent = entry.url;
-    urlCell.setAttribute('data-label', 'Website URL');
+    urlCell.setAttribute('data-label', 'UserID');
     row.appendChild(urlCell);
 
     // Password cell with Show/Hide button
