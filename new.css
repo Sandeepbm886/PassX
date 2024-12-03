@@ -1,5 +1,12 @@
-/* Reset and Base Styles */
 @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@font-face{
+    font-family: myfont;
+    src: url(superchargestraightlaser.ttf);
+}
+@font-face{
+    font-family: bart;
+    src: url(SIMPSONS.TTF);
+}
 :root {
     --primary-color: #4f46e5;
     --primary-hover: #4338ca;
@@ -12,6 +19,9 @@
 }
 html{
     scroll-behavior: smooth;
+}
+h1 span{
+    color: #fde047;
 }
 
 * {
@@ -88,8 +98,12 @@ body {
 }
 
 .logo span {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: myfont;
+    font-size: 3rem;
+    color: #0c328a;
+    
+    
+    
 }
 
 .nav-menu {
@@ -310,6 +324,10 @@ body {
     border-top: 1px solid var(--gray-200);
     color: var(--text-light);
 }
+.bart{
+    font-family: bart;
+    font-size: 2rem;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -335,6 +353,9 @@ body {
     }
 
     .hero h1 {
+        font-size: 2rem;
+    }
+    .logo span{
         font-size: 2rem;
     }
 

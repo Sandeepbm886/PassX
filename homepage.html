@@ -80,7 +80,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Rows will be added here by JavaScript -->
+
                 </tbody>
             </table>
         </div>
@@ -120,20 +120,20 @@
         }
 
         function logout() {
-            localStorage.removeItem("loggedInUser"); // Clear the logged-in user
+            localStorage.removeItem("loggedInUser");
             alert("You have been logged out.");
-            window.location.href = "login.html"; // Redirect to login page
+            window.location.href = "login.html";
         }
         const mediaQuery = window.matchMedia("(max-width: 1020px)");
 
 document.getElementById('check').addEventListener('change', function() {
     const leftSection = document.querySelector('.left-section > div:nth-of-type(2)');
     
-    if (mediaQuery.matches) { // Check if screen width is 360px or less
+    if (mediaQuery.matches) { 
         if (this.checked) {
             leftSection.style.left = '0';
         } else {
-            leftSection.style.left = '-110rem'; // Or any off-screen position
+            leftSection.style.left = '-110rem'; 
         }
     }
 });

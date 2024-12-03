@@ -1,5 +1,3 @@
-// script.js
-
 let password = document.getElementById("password");
 let power = document.getElementById("power-point");
 password.oninput = function () {

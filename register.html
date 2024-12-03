@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+        @font-face{
+            font-family: fg;
+            src: url(FAMILY\ GUY\ GIGGITY.ttf);
+        }
         * {
             margin: 0;
             padding: 0;
@@ -27,8 +32,8 @@
             position: absolute;
             top: .5rem;
             right: 1rem;
-            text-decoration: none;
-            background-color: #184899;
+            text-decoration:solid;
+            /* background-color: #184899; */
             border-radius: .3rem;
             padding: 0 1rem;
             color: white;
@@ -54,6 +59,10 @@
             margin-bottom: 2rem;
             font-size: 1.875rem;
             font-weight: 600;
+        }
+        .fam{
+            font-family: fg;
+            font-size: 2rem;
         }
 
         input {
@@ -149,10 +158,11 @@
     </style>
 </head>
 <body>
-    <a class="Home" href="index.html">Home</a>
+    <a class="Home" href="index.html"><i class="fa-solid fa-house"></i></a>
     <form id="signupForm">
-        <h2>Create Account</h2>
+        <h2>Create Account <span class="fam">d</span></h2>
         <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
         <div class="password-container">
             <input type="password" id="password" placeholder="Password" required>
             <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
@@ -177,24 +187,49 @@
         }
 
         function register() {
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-            if (!username || !password) {
-                alert("Please fill in both username and password.");
-                return;
-            }
+    if (!username || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+    }
 
-            if (password.length < 6) {
-                alert("Password must be at least 6 characters long.");
-                return;
-            }
-
-            localStorage.setItem("username", username);
-            localStorage.setItem("password", password);
-            alert("Registered successfully!");
-            window.location.href = "login.html";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    if (!passwordRegex.test(password)) {
+        alert(
+            "Password must be at least 8 characters long and include:\n" +
+            "- At least one uppercase letter\n" +
+            "- At least one lowercase letter\n" +
+            "- At least one number\n" +
+            "- At least one special character (@, $, !, %, *, ?, &, #)"
+        );
+        return;
+    }
+    if (localStorage.getItem(username + "_username")) {
+        alert("Username already exists. Please choose a different username.");
+        return;
+    }
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.endsWith("_email") && localStorage.getItem(key) === email) {
+            alert("Email is already registered. Please use a different email.");
+            return;
         }
+    }
+    localStorage.setItem(username + "_username", username);
+    localStorage.setItem(username + "_email", email);
+    localStorage.setItem(username + "_password", password);
+
+    alert("Registered successfully!");
+    window.location.href = "login.html";
+}
     </script>
 </body>
 </html>
