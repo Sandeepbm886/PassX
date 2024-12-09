@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
         @font-face{
@@ -162,123 +162,51 @@
         }
     </style>
 </head>
+
 <body>
     <a class="Home" href="index.html"><i class="fa-solid fa-house"></i></a>
     <form id="loginForm" onsubmit="login(event)">
         <h2>Welcome Back <span class="gar">A</span></h2>
         <input type="text" id="loginUsername" placeholder="Username" required>
         <div class="password-container">
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
-    </div>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+        </div>
         <button type="submit">Sign In</button>
         <div class="login-link">
             Don't have an account? <a href="register.html">Register</a>
         </div>
         <div class="login-link">
-            Forgot your password? <a href="#" onclick="forgotPassword()">Click here</a>
+            Forgot your password? <a href="forgot-password.html">Click here</a>
         </div>
-
     </form>
-    <script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script>
-    (function() {
-        emailjs.init("l3to3ingmaUe9vHxQ"); 
-    })();
-</script>
 
     <script>
-        
-function togglePassword() {
-    const passwordField = document.getElementById("loginPassword"); 
-    const toggleButton = document.querySelector(".toggle-password");
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        toggleButton.textContent = "Hide";
-    } else {
-        passwordField.type = "password";
-        toggleButton.textContent = "Show";
-    }
-}
-
-function login(event) {
-    event.preventDefault();
-
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-    const storedPassword = localStorage.getItem(username + "_password");
-
-    if (storedPassword && password === storedPassword) {
-        localStorage.setItem("loggedInUser", username);
-        window.location.href = "homepage.html";
-    } else {
-        alert("Invalid credentials. Please try again.");
-    }
-}
-
-function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000);
-}
-
-function forgotPassword() {
-    const username = prompt("Enter your registered username:");
-    const storedEmail = localStorage.getItem(username + "_email");
-
-    if (!storedEmail) {
-        alert("No account found with the given username.");
-        return;
-    }
-
-    const otp = generateOTP();
-    const otpExpiration = Date.now() + 10 * 60 * 1000;
-
-    localStorage.setItem("otp", otp);
-    localStorage.setItem("otpExpiration", otpExpiration);
-
-    emailjs.send("service_rbo42ti", "template_ezqnd3u", {
-        to_email: storedEmail,
-        OTP: otp,
-    }).then(
-        (response) => {
-            console.log("Email sent successfully:", response);
-            alert("OTP sent to your email.");
-            verifyOTP(username);
-        },
-        (error)=>{ 
-            console.error("EmailJS error:", error);
-            alert("Failed to send OTP. Please try again.")}
-    );
-}
-
-function verifyOTP(username) {
-    const userOTP = prompt("Enter the OTP sent to your email:");
-    const storedOTP = localStorage.getItem("otp");
-    const otpExpiration = parseInt(localStorage.getItem("otpExpiration"), 10);
-
-    if (Date.now() > otpExpiration) {
-        alert("The OTP has expired. Please request a new one.");
-        return;
-    }
-
-    if (userOTP === storedOTP) {
-        alert("OTP verified. You can reset your password.");
-        const newPassword = prompt("Enter your new password:");
-
-        if (newPassword && newPassword.length >= 6) {
-            localStorage.setItem(username + "_password", newPassword);
-            alert("Password reset successful!");
-        } else {
-            alert("Password must be at least 6 characters long.");
+        function togglePassword() {
+            const passwordField = document.getElementById("loginPassword"); 
+            const toggleButton = document.querySelector(".toggle-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleButton.textContent = "Show";
+            }
         }
-    } else {
-        alert("Invalid OTP. Please try again.");
-    }
 
-    localStorage.removeItem("otp");
-    localStorage.removeItem("otpExpiration");
-}
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById("loginUsername").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+            const storedPassword = localStorage.getItem(`${username}_password`);
+
+            if (storedPassword && password === storedPassword) {
+                localStorage.setItem("loggedInUser", username);
+                window.location.href = "homepage.html";
+            } else {
+                alert("Invalid credentials. Please try again.");
+            }
+        }
     </script>
 </body>
 </html>
