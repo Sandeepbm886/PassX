@@ -23,25 +23,25 @@ function generatePassword() {
     
     const shuffled_pass = temp_pass.split('').sort(() => 0.5 - Math.random()).join('');
     
-    currentPassword = shuffled_pass; // Save the password for copying
+    currentPassword = shuffled_pass; 
     document.getElementById('password').textContent = shuffled_pass;
-    document.getElementById('copyMessage').style.display = 'none'; // Hide copy message if visible
+    document.getElementById('copyMessage').style.display = 'none'; 
 }
 
 function copyPassword() {
-    // Create a temporary input element to store the password value
+    
     const tempInput = document.createElement('input');
     tempInput.value = currentPassword;
     document.body.appendChild(tempInput);
 
-    // Select and copy the text
+    
     tempInput.select();
-    tempInput.setSelectionRange(0, 99999); // For mobile devices
+    tempInput.setSelectionRange(0, 99999); 
     document.execCommand('copy');
 
-    // Remove the temporary input element
+    
     document.body.removeChild(tempInput);
 
-    // Display a message to show that the password has been copied
+    
     document.getElementById('copyMessage').style.display = 'block';
 }
